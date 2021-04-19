@@ -7,6 +7,10 @@ import store from './store/index'
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 
+Vue.filter('year', function(value) {
+  return value.split('-')[0]
+})
+
 const router = new VueRouter({
   mode: "history",
   routes
