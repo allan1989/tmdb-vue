@@ -5,12 +5,17 @@ import apiKey from '../api';
 
 const state = {
   movies: [],
-  isLoading: true
+  isLoading: true,
+  hasError: {
+    status: false,
+    message: ''
+  }
 };
 
 const getters = {
   isLoading: (state) => state.isLoading,
-  trendingMovies: (state) => state.movies
+  trendingMovies: (state) => state.movies,
+  hasError: (state) => state.hasError
 };
 
 const actions = {
@@ -20,14 +25,20 @@ const actions = {
       commit('setLoading', false)
       commit('setMovies', response.data.results)
     }catch(err){
-      console.log('error', err)
+      commit('setLoading', false)
+      commit('setError', {
+        status: true,
+        message: err
+      })
+      console.warn(err)
     } 
   }
 };
 
 const mutations = {
   setMovies: (state, payload) => (state.movies = payload),
-  setLoading: (state, payload) => (state.isLoading = payload)
+  setLoading: (state, payload) => (state.isLoading = payload),
+  setError: (state, payload) => (state.hasError = payload)
 };
 
 export default {
