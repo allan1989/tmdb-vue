@@ -10,7 +10,7 @@ const routes = [
     component: Discover
   },
   {
-    path: '/search',
+    path: '/search/:searchTerm',
     name: 'Search',
     component: Search
   },

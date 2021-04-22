@@ -41,7 +41,7 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style>
   .movies-container{
     display: flex;
     flex-wrap: wrap;

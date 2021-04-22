@@ -1,6 +1,6 @@
 <template>
   <div class="movie-card">
-    <img :src=" 'https://image.tmdb.org/t/p/original' + movie.poster_path" 
+    <img :src=" movie.poster_path ? 'https://image.tmdb.org/t/p/original' + movie.poster_path : require('../assets/notfound.png') " 
          :alt='movie.title'
          class="poster"/>
     <h2 class="title">{{ movie.title }}</h2>
@@ -20,6 +20,7 @@ export default {
   }
   .movie-card .poster{
     max-width: 100%;
+    min-height: 375px;
   }
   .movie-card .title{
     font-size: 20px;
