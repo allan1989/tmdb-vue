@@ -3,7 +3,9 @@
     <img :src=" movie.poster_path ? 'https://image.tmdb.org/t/p/original' + movie.poster_path : require('../assets/notfound.png') " 
          :alt='movie.title'
          class="poster"/>
-    <h2 class="title">{{ movie.title }}</h2>
+    <h2 class="title">
+      <router-link :to=" '/movie/' + movie.id ">{{ movie.title }}</router-link>
+    </h2>
     <p class="date"> {{ movie.release_date | year }}</p>
   </div>
 </template>
@@ -21,6 +23,7 @@ export default {
   .movie-card .poster{
     max-width: 100%;
     min-height: 375px;
+    max-height: 375px;
   }
   .movie-card .title{
     font-size: 20px;

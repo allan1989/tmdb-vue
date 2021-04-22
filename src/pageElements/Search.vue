@@ -23,6 +23,7 @@ export default {
   },
   methods: {
     searchMovie(){
+      if(this.search === '') return;
       this.$router.push({
         name: 'Search',
         params: {

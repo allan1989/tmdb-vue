@@ -3,7 +3,9 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h1 class="title"><img src='../assets/tmdb-logo.svg'></h1>
+          <h1 class="title">
+            <router-link to='/'><img src='../assets/tmdb-logo.svg'></router-link>
+          </h1>
         </div>
       </div>
     </div>
