@@ -40,6 +40,7 @@ export default {
     width: 100%;
     border: none;
     border-bottom: 1px solid #EEE;
+    background-color: #f7f3e9;
     color: #6d7074;
     padding: 20px 0;
   }

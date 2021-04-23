@@ -1,13 +1,13 @@
 <template>
-  <div class="movie-card">
-    <img :src=" movie.poster_path ? 'https://image.tmdb.org/t/p/original' + movie.poster_path : require('../assets/notfound.png') " 
-         :alt='movie.title'
-         class="poster"/>
-    <h2 class="title">
-      <router-link :to=" '/movie/' + movie.id ">{{ movie.title }}</router-link>
-    </h2>
-    <p class="date"> {{ movie.release_date | year }}</p>
-  </div>
+  <router-link class='movie-card-link-wrapper' :to=" '/movie/' + movie.id ">
+    <div class="movie-card">
+      <img :src=" movie.poster_path ? 'https://image.tmdb.org/t/p/original' + movie.poster_path : require('../assets/notfound.png') " 
+          :alt='movie.title'
+          class="poster"/>
+      <h2 class="title">{{ movie.title }}</h2>
+      <p class="date"> {{ movie.release_date | year }}</p>
+    </div>
+  </router-link>
 </template>
 <script>
 export default {
@@ -33,5 +33,12 @@ export default {
   .movie-card .date{
     margin-bottom: 0;
     font-size: 14px;
+  }
+  .movie-card-link-wrapper{
+    color: black;
+    text-decoration: none;
+  }
+  .movie-card-link-wrapper:hover .title{
+    text-decoration: underline;
   }
 </style>
