@@ -10,6 +10,7 @@
             <p>{{ hasError.message }}</p>
           </div>
           <div v-else class="movie-detail">
+            <button class='go-back-link' @click='goBack'>Back</button>
             <h2 class="movie-detail-title">{{ getSingleMovie.original_title}} <span class="movie-detail-year">({{ getSingleMovie.release_date | year }})</span></h2>
             <p class="movie-detail-full-release-date">{{ getSingleMovie.release_date | full_release_date }}</p>
             <p class="movie-detail-full-genres">{{ getSingleMovie.genres | genres }}</p>
@@ -17,14 +18,16 @@
                  :alt="getSingleMovie.title"
                  class="movie-detail-poster"/>
             <p class="movie-detail-overview">{{ getSingleMovie.overview }}</p>
-            <a class='movie-detail-imdb-link' :href=" 'https://www.imdb.com/title/' + getSingleMovie.imdb_id " target='_blank' title='view on IMDB (open in new window)'>
+            <a v-show="getSingleMovie.imdb_id" class='movie-detail-imdb-link' :href=" 'https://www.imdb.com/title/' + getSingleMovie.imdb_id " target='_blank' title='view on IMDB (open in new window)'>
               <img src='../../assets/imdb-logo.svg' alt='IMDB logo'>
             </a>
           </div>
         </section>
       </div>
     </div>
-    <Recommendations v-show="this.getRecommendations.length > 0" 
+    <Recommendations
+      v-show="this.getRecommendations.length > 0" 
+      :from-recommendations-section='true' 
       :isLoading='isLoading'
       :hasError="hasError"   
       :movies="this.getRecommendations"/>
@@ -45,7 +48,10 @@ export default {
     this.fetchRecommendations(this.$route.params.movieId)
   },
   methods: {
-    ...mapActions(['fetchSingleMovie', 'fetchRecommendations'])
+    ...mapActions(['fetchSingleMovie', 'fetchRecommendations']),
+    goBack(){
+      this.$router.go(-1)
+    }
   },
   computed: {
     ...mapGetters(['isLoading', 'getSingleMovie', 'hasError', 'getRecommendations'])
@@ -54,9 +60,9 @@ export default {
 </script>
 
 <style scoped>
-  .movie-detail{}
   .movie-detail-title{
     font-size: 50px;
+    margin-top: 40px;
   }
   .movie-detail-year{
     font-size: 40px;
@@ -74,5 +80,13 @@ export default {
   }
   .movie-detail-imdb-link:hover{
     transform: scale(1.1);
+  }
+  .go-back-link{
+    border: none;
+    background: transparent;
+    text-decoration: underline;
+  }
+  .go-back-link:hover{
+    text-decoration: none;
   }
 </style>
