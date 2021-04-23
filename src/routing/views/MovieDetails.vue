@@ -24,22 +24,31 @@
         </section>
       </div>
     </div>
+    <Recommendations v-show="this.getRecommendations.length > 0" 
+      :isLoading='isLoading'
+      :hasError="hasError"   
+      :movies="this.getRecommendations"/>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import Recommendations from '../../components/recommendations.vue'
 
 export default {
   name: 'Movie-Details',
+  components: {
+    Recommendations
+  },
   mounted(){
-    this.fetchSingleMovie(this.$route.params.movieId)
+    this.fetchSingleMovie(this.$route.params.movieId);
+    this.fetchRecommendations(this.$route.params.movieId)
   },
   methods: {
-    ...mapActions(['fetchSingleMovie'])
+    ...mapActions(['fetchSingleMovie', 'fetchRecommendations'])
   },
   computed: {
-    ...mapGetters(['isLoading', 'getSingleMovie', 'hasError'])
+    ...mapGetters(['isLoading', 'getSingleMovie', 'hasError', 'getRecommendations'])
   }
 }
 </script>

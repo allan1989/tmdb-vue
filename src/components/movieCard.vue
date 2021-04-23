@@ -10,9 +10,21 @@
   </router-link>
 </template>
 <script>
+import { mapActions } from 'vuex';
 export default {
   name: 'movieCard',
   props: ['movie'],
+  methods: {
+    ...mapActions(['fetchSingleMovie', 'fetchRecommendations'])
+  },
+  watch: {
+    '$route' (to, from){
+      if(to.params.movieId !== from.params.movieId){
+        this.fetchSingleMovie(to.params.movieId);
+        this.fetchRecommendations(to.params.movieId);
+      }
+    }
+  }
 }
 </script>
 <style scoped>

@@ -9,7 +9,8 @@ const state = {
     message: ''
   },
   searchResults: [],
-  movie: {}
+  movie: {},
+  recommendations: []
 };
 
 const getters = {
@@ -17,7 +18,8 @@ const getters = {
   trendingMovies: (state) => state.movies,
   hasError: (state) => state.hasError,
   getSearchResults: (state) => state.searchResults,
-  getSingleMovie: (state) => state.movie
+  getSingleMovie: (state) => state.movie,
+  getRecommendations: (state) => state.recommendations
 };
 
 const actions = {
@@ -62,7 +64,21 @@ const actions = {
       })
       console.warn(err)
     }
-  }
+  },
+  async fetchRecommendations({commit}, id){
+    try{
+      let response = await axios.get(`https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${apiKey}&language=en-US&page=1`);
+      commit('setLoading', false)
+      commit('setRecommendationsMovies', response.data.results.slice(0, 5))
+    }catch(err){
+      commit('setLoading', false)
+      commit('setError', {
+        status: true,
+        message: err
+      })
+      console.warn(err)
+    }
+  },
 };
 
 const mutations = {
@@ -70,7 +86,8 @@ const mutations = {
   setLoading: (state, payload) => state.isLoading = payload,
   setError: (state, payload) => state.hasError = payload,
   setSearchResult: (state, payload) => state.searchResults = payload,
-  setSingleMovie: (state, payload) => state.movie = payload
+  setSingleMovie: (state, payload) => state.movie = payload,
+  setRecommendationsMovies: (state, payload) => state.recommendations = payload
 };
 
 export default {
