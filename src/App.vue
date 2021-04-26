@@ -3,19 +3,21 @@
     <Header/>
     <Search/>
     <router-view/>  
+    <Footer/>
   </div>
 </template>
 
 <script>
 import Header from './pageElements/Header.vue'
 import Search from './pageElements/Search.vue'
-
+import Footer from './pageElements/Footer.vue'
 
 export default {
   name: 'App',
   components: {
     Header,
-    Search
+    Search,
+    Footer
   }
 }
 </script>

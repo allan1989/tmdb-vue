@@ -13,7 +13,11 @@
             <p>{{ hasError.message }}</p>
           </div>
           <div v-else class="movies-container">
-            <movie-card v-for='movie in movies' :movie='movie' :key='movie.id'></movie-card>
+            <movie-card 
+              v-for='movie in movies' 
+              :movie='movie' 
+              :key='movie.id'
+              :fromRecommendationsSection='true'></movie-card>
           </div>
         </section>
       </div>

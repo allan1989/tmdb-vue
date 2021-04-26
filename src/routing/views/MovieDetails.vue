@@ -10,7 +10,10 @@
             <p>{{ hasError.message }}</p>
           </div>
           <div v-else class="movie-detail">
-            <button class='go-back-link' @click='goBack'>Back</button>
+            <button 
+              v-show='!this.$route.params.fromRecommendationsSection'
+              class='go-back-link' 
+              @click='goBack'>Back To The Results</button>
             <h2 class="movie-detail-title">{{ getSingleMovie.original_title}} <span class="movie-detail-year">({{ getSingleMovie.release_date | year }})</span></h2>
             <p class="movie-detail-full-release-date">{{ getSingleMovie.release_date | full_release_date }}</p>
             <p class="movie-detail-full-genres">{{ getSingleMovie.genres | genres }}</p>
@@ -27,7 +30,6 @@
     </div>
     <Recommendations
       v-show="this.getRecommendations.length > 0" 
-      :from-recommendations-section='true' 
       :isLoading='isLoading'
       :hasError="hasError"   
       :movies="this.getRecommendations"/>

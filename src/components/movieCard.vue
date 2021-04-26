@@ -1,5 +1,13 @@
 <template>
-  <router-link class='movie-card-link-wrapper' :to=" '/movie/' + movie.id ">
+  <router-link 
+    class='movie-card-link-wrapper' 
+    :to=" {
+      name: 'MovieDetails',
+      params: {
+        movieId: movie.id, 
+        fromRecommendationsSection: fromRecommendationsSection
+      },
+     }">
     <div class="movie-card">
       <img :src=" movie.poster_path ? 'https://image.tmdb.org/t/p/original' + movie.poster_path : require('../assets/notfound.png') " 
           :alt='movie.title'
@@ -13,7 +21,7 @@
 import { mapActions } from 'vuex';
 export default {
   name: 'movieCard',
-  props: ['movie'],
+  props: ['movie', 'fromRecommendationsSection'],
   methods: {
     ...mapActions(['fetchSingleMovie', 'fetchRecommendations'])
   },
