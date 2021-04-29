@@ -45,7 +45,7 @@ export default {
   components: {
     Recommendations
   },
-  mounted(){
+  created(){
     this.fetchSingleMovie(this.$route.params.movieId);
     this.fetchRecommendations(this.$route.params.movieId)
   },

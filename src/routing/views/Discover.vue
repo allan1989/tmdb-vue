@@ -36,7 +36,7 @@ export default {
   computed: {
     ...mapGetters(['isLoading', 'trendingMovies', 'hasError'])
   },
-  mounted(){
+  created(){
     this.getTrendingMovies();
   }
 }

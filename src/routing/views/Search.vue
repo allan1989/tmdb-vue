@@ -32,7 +32,7 @@ export default {
   methods: {
     ...mapActions(['searchMovie'])
   },
-  mounted(){
+  created(){
     this.searchMovie(this.$route.params.searchTerm)
   },
   computed: {

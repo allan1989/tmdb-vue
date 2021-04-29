@@ -21,7 +21,15 @@
 import { mapActions } from 'vuex';
 export default {
   name: 'movieCard',
-  props: ['movie', 'fromRecommendationsSection'],
+  props: {
+    'movie': {
+      type: Object,
+      required: true
+    }, 
+    'fromRecommendationsSection': {
+      type: Boolean,
+    }
+  },
   methods: {
     ...mapActions(['fetchSingleMovie', 'fetchRecommendations'])
   },

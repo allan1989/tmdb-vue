@@ -29,7 +29,20 @@
 import movieCard from './movieCard';
 export default {
   name: 'Recommendations',
-  props:['isLoading', 'movies', 'hasError'],
+  props: {
+    'isLoading': {
+      type: Boolean,
+      required: true
+    }, 
+    'movies': {
+      type: Array,
+      required: true
+    },
+    'hasError': {
+      type: Object,
+      required: true
+    }
+  },  
   components: {
     movieCard
   }
