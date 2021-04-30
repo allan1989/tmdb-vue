@@ -1,4 +1,12 @@
 import {apiCalls} from '../utils.js';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import router from '@/routing/index.js';
+const localVue = createLocalVue()
+localVue.use(VueRouter)
+const router = new VueRouter()
+import SearchBar from '@/pageElements/Search.vue';
 import data from '../data.js';
 import mockAxios from 'axios';
 
@@ -13,25 +21,62 @@ jest.mock('axios');
 describe('api calls', () => {
   afterEach(jest.clearAllMocks);
 
-  test('should return a single movie', async() => {
+  test('should return a single movie', async () => {
     mockAxios.get.mockResolvedValue(mockData)
     const result = await apiCalls.fetchSingleMovie(456740);
     expect(result).toEqual(mockDataTest);
     expect(mockAxios.get).toHaveBeenCalledTimes(1)
   });
 
-  test('should return a list of movies', async() => {
+  test('should return a list of movies', async () => {
     mockAxios.get.mockResolvedValue(data)
     const result = await apiCalls.getTrendingMovies();
     expect(result.results).toHaveLength(20)
     expect(mockAxios.get).toHaveBeenCalledTimes(1)
   });
 
-  test('should return a list of 5 movies', async() => {
+  test('should return a list of 5 movies', async () => {
     mockAxios.get.mockResolvedValue(data);
     const result = await apiCalls.fetchRecommendations(456740)
     expect(result.results.slice(0, 5)).toHaveLength(5);
     expect(mockAxios.get).toHaveBeenCalledTimes(1);
   });
+});
 
-})
+function createConfig (overrides) {
+  
+  const mocks = {
+    // Vue Router
+    $router: {
+      push: jest.fn()
+    },
+    // Vuex
+    $store: {
+      state: { } ,
+      commit: () => {}
+    }
+  }
+  const propsData = { };
+  return Object.assign({ mocks, propsData }, overrides);  
+}
+
+describe('testing functionalities', () => {
+  test('router called when click on button to search for a movie', () => {
+
+
+
+
+
+
+    // const config = createConfig();
+    // const wrapper = shallowMount(SearchBar, config);
+    // const searchTerm = 'test';
+    // window.location.href = jest.fn() // Create a spy
+    // wrapper
+    //   .find('.search-submit')
+    //   .trigger('click')
+    //   const spy = jest.spyOn(config.mocks.$router, "push");
+    //   const route = router.find(route => route.name === "Search");
+    //   expect(wrapper.vm.$route.name).toHaveBeenCalledWith(`/search/${searchTerm}`);  
+  })
+});
