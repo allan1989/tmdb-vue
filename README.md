@@ -1,5 +1,19 @@
 # tmdb-vue
 
+## The movie database
+```
+Search for a movie using the free API TMDB
+```
+
+## What I learn:
+```
+Lifecycles
+Props
+Filters
+Vue Router
+Vuex (state, mutations, actions, getters)
+```
+
 ## Project setup
 ```
 npm install
@@ -10,15 +24,5 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Live Demo
+Live demo [here](https://tmdbvue.netlify.app/).
